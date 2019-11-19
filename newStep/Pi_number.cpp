@@ -1,6 +1,6 @@
 // This programme for calculation of pi-number
-#include <time.h>
-#include <iostream>
+
+
 /*
 Реализация формулы Белларда:
 
@@ -9,8 +9,22 @@ PI = 1/(2^6) summ(from n = 0 to n = inf) ( (-1)^n )/( 2^10n ) *
 
 */
 
-void Bellard(int N){
+#include <time.h>
+#include <iostream>
+#include <cmath>
+
+
+void Bellard(int N)
+{
+	long double PI = 0;
 	clock_t t = clock();
+
+	for(int n = 0; n < N; n++)
+	{
+		PI = 0;
+	}
+
+
 }
 
 using namespace std;
