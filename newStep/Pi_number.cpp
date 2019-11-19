@@ -22,10 +22,12 @@ void Bellard(int N)
 
 	for(int n = 0; n < N; n++)
 	{
-		
+		sum = sum + pow(-1, n)/pow(2, 10*n) * ( - pow(2,5)/(4*n+1) - 1/(4*n+3) + 
+			pow(2,8)/(10*n+1) - pow(2,6)/(10*n+3) - pow(2,2)/(10*n+5) - pow(2,2)/(10*n+7) + 1/(10*n+9)
+		 ) ;
 	}
 	PI = 1/pow(2,6)*sum;
-	t = (clock() - t)/CLK_TCK;
+	t = (clock() - t);
 
 	cout << "\n\n\t" << "Using equation of Bellard Pi-number equal is " 
 	 <<PI  << endl;
