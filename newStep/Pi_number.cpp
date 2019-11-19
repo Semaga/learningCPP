@@ -74,15 +74,27 @@ void BBP(int N, bool only_answer = false)
 
 }
 
+// Формула Матчина
+void Matchine(bool only_answer = false)
+{
+	srand(time(0));
+	long double PI = 0.0, a = 1.0/5.0, b = 1.0/239.0;
+	cout.precision(10);
+	cout << "a = " << a << "\nb = " << b << endl;
+	PI = 4.0*(4.0*atan(a) - atan(b));
+	cout << "\n\n\t" << "Matchine Pi = " << PI << endl;
+	cout << "\t\t Time = " << clock()/1000.0 << endl;
+}
 
 
 int main()
 {
-	for(int i = 1; i < 10001; i=i*10)
-		{
-			Bellard(i, true);
-			BBP(i, true);
-		}
-	
+	// for(int i = 1; i < 10001; i=i*10)
+	// 	{
+	// 		Bellard(i, true);
+	// 		BBP(i, true);
+	// 	}
+	Matchine(false);
+
 	return 0;
 }
