@@ -59,7 +59,6 @@ void BBP(int N, bool only_answer = false)
 			- 1.0/(8.0*i + 5.0) - 1.0/(8.0*i +6.0) );
 		// if (i%10 == 0)
 		// 	cout << "\t" << i << " itteration complited\n"<< endl;  
-
 	}
 	if(only_answer)
 	{
