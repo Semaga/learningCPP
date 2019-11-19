@@ -22,8 +22,9 @@ void Bellard(int N)
 
 	for(int n = 0; n < N; n++)
 	{
-		sum = sum + pow(-1, n)/pow(2, 10*n) * ( - pow(2,5)/(4*n+1) - 1/(4*n+3) + 
-			pow(2,8)/(10*n+1) - pow(2,6)/(10*n+3) - pow(2,2)/(10*n+5) - pow(2,2)/(10*n+7) + 1/(10*n+9)
+		sum = sum + pow(-1.0, n)/pow(2.0, 10*n) * ( - pow(2.0,5)/(4.0*n+1) - 1/(4.0*n+3) + 
+			pow(2.0,8.0)/(10.0*n+1.0) - pow(2.0,6.0)/(10.0*n+3.0) - 
+			pow(2.0,2.0)/(10.0*n+5.0) - pow(2.0,2.0)/(10.0*n+7.0) + 1.0/(10.0*n+9.0)
 		 ) ;
 	}
 	PI = 1/pow(2,6)*sum;
@@ -31,6 +32,7 @@ void Bellard(int N)
 
 	cout << "\n\n\t" << "Using equation of Bellard Pi-number equal is " 
 	 <<PI  << endl;
+	cout << "\tN = " << N << endl;
 	cout << "\tSpended time is " << t << "\n\n" << endl;
 }
 
@@ -39,9 +41,9 @@ void Bellard(int N)
 
 int main()
 {
-	long double pi = 0;
-	Bellard(1);
-
+	for(int i = 0; i < 1000; i+= 10){
+		Bellard(i);
+	}
 
 	return 0;
 }
