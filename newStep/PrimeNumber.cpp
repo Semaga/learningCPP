@@ -31,7 +31,16 @@ void PrimeNumber(int number)
 			v.push_back(probe);
 		}
 	}
+	vector <int> a;
+	a.push_back(v[0]);
+	for(size_t i = 1; i < v.size(); i++){
+		for(size_t j = 0; j < v.size(); j++ ){
+			if(v[j]!=v[i])
+				a.push_back(v[j]);
+		}
+	}
 
+	PrintVec(a);
 	PrintVec(v);
 
 }
@@ -39,6 +48,9 @@ void PrimeNumber(int number)
 
 int main()
 {
-	PrimeNumber(15);
+	int t;
+	cout << "Input number : " ;
+	cin >> t;
+	PrimeNumber(t);
 	return 0;
 }
