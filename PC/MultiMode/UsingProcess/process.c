@@ -29,14 +29,14 @@ void process_function (int my_rank, int p)
 		{
 			fprintf(stderr, "Error reading in process %d, pid =%d\n", 
 				my_rank, getpid());
-		return 0;
+		return;
 		}
 
-	if(write( to_root[1], &integral, sizeof(double)) ! = sizeof(double))
+	if(write( to_root[1], &integral,  sizeof(double)) ! = sizeof(double))
 		{
 			fprintf(stderr, "Error writing in process %d, pid = %d\n", 
 				my_rank, getpid());
-			return 0;
+			return;
 		}	
 
 }
