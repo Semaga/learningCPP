@@ -1,8 +1,8 @@
-# include "integral.h"
+#include "integral.h"
 
 double f(double x)
 {
-	return x;
+	return x*x;
 }
 
 double integrate(double a, double b, int n)
