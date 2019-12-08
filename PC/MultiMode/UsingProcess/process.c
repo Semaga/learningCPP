@@ -25,12 +25,11 @@ void process_function (int my_rank, int p)
 
 	integral = integrate( local_a, local_b, local_n);
 
-	if(read (from_root[0], ^byte, 1) != 1)
+	if(read (from_root[0], &byte, 1) != 1)
 		{
 			fprintf(stderr, "Error reading in process %d, pid =%d\n", 
 				my_rank, getpid());
-
-			return 0;
+		return 0;
 		}
 
 	if(write( to_root[1], &integral, sizeof(double)) ! = sizeof(double))
@@ -110,7 +109,7 @@ int main(int argc, char  *argv[])
 							return 100;
 						}
 					/*Read result*/
-					if (read (to_root[0], &integral, sizeof (double))! sizeof(double))
+					if (read (to_root[0], &integral, sizeof (double))!= sizeof(double))
 						{
 							fprintf(stderr, "Error reading in root process\n");
 							return 101;
