@@ -22,7 +22,7 @@ void * process_function (void *pa)
 		double local_b = local_a + len;
 		double integral;
 
-		integral = integate (local_a, local_b, local_n);
+		integral = integrate (local_a, local_b, local_n);
 
 		pthread_mutex_lock (&total_mutex);
 		total+= integral;
