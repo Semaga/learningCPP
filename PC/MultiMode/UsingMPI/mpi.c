@@ -21,3 +21,15 @@ void process_function(int my_rank, int p)
 
 		MPI_Reduce (&integral, &total, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 	}
+
+int main(int argc, char const **argv)	
+	{
+		int my_rank;
+		int p;
+
+		MPI_Init (&argc, &argv);
+
+		
+
+		return 0;
+	}
