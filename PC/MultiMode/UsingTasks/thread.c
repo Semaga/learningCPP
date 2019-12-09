@@ -30,7 +30,7 @@ void * process_function (void *pa)
 		return 0;
 	}
 
-int int main(int argc, char  *argv[])
+int main(int argc, char  *argv[])
 	{
 		pthread_t * threads;
 		int i;
