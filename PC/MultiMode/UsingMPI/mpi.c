@@ -29,7 +29,17 @@ int main(int argc, char const **argv)
 
 		MPI_Init (&argc, &argv);
 
-		
+		MPI_Comm_rank (MPI_COMM_WORLD, &my_rank);
+		MPI_Comm_size (MPI_COMM_WORLD, &p);
+
+		process_function (my_rank, p);
+
+		if (my_rank ==0 )qu
+			{
+				printf("Integral from %lf to %lf =%.18lf\n", a, b, total);
+			}
+
+		MPI_Finalize();
 
 		return 0;
 	}
