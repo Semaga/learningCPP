@@ -34,7 +34,7 @@ int main(int argc, char const **argv)
 
 		process_function (my_rank, p);
 
-		if (my_rank ==0 )qu
+		if (my_rank ==0 )
 			{
 				printf("Integral from %lf to %lf =%.18lf\n", a, b, total);
 			}
