@@ -5,9 +5,11 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
-
+#include <algorithm>
 
 using namespace std;
+
+void SortingBubble(vector <int> &v);
 
 template <typename T>
 void PrintVec(vector <T> &v);
@@ -91,10 +93,18 @@ void DoSortFromFile(const string &ReadFileName, const string &WriteFileName, vec
 		int t;
 		cout << "\t\t";
 		cout << "Which algorithm you want to use?" << endl;
-		cout << "Standart from std::vector - (press 1) "; cin >> t;
-		if (t == 1) 
-			sort(data.begin(), data.end());
+		cout << "Standart from std::vector - (press 1) \nStandart from std::vector - (press 2)"<< endl; 
+		cout << "Input value: ";
+		cin >> t;
+		if (t == 1){
+			sort(	data.begin(), data.end());
 			cout << "Sorting is done " << endl;	
+		}else if(t == 2)
+		{
+			SortingBubble(data);
+			cout << "Sorting is done " << endl;	
+
+		}
 		// PrintVec(data);
 	}else
 		cout << "\tError" << "\n\tfile " << ReadFileName << " not found" << endl;
@@ -103,7 +113,6 @@ void DoSortFromFile(const string &ReadFileName, const string &WriteFileName, vec
 			WriteVectorToFile(WriteFileName, data, ' ');
 		}else
 		cout << "\tError" << "\n\tfile " << WriteFileName << " not found" << endl;
-
 }
 
 template <typename T>
@@ -127,5 +136,17 @@ void WriteVectorToFile(const string &WriteFileName, vector <T> &v,
 
 	}else
 		cout << "Error, file "<< WriteFileName <<" not found ..." << endl;
+}
+
+void SortingBubble(vector <int> &v)
+{
+	for(auto i = v.size(); i>= 1;i--)
+	{
+		for (auto j = 0; j < i; ++j)
+		{
+			if(v[j]>v[i])
+				swap(v[j],v[i]);
+		}
+	}	
 }
 
