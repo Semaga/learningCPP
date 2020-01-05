@@ -1,0 +1,32 @@
+Replace sstream library to ffstream
+
+# --------------
+# Please enter the commit message for your changes. Everything below
+# this paragraph is ignored, and an empty message aborts the commit.
+# Just close the window to accept your message.
+diff --git a/.DS_Store b/.DS_Store
+index 88afe98..cf10ef3 100644
+Binary files a/.DS_Store and b/.DS_Store differ
+diff --git a/Sort/mkFile.cpp b/Sort/mkFile.cpp
+index 708364f..201e3ae 100644
+--- a/Sort/mkFile.cpp
++++ b/Sort/mkFile.cpp
+@@ -1,4 +1,12 @@
+ //This file make files with random quantity numbers
+ 
+-#include <sstream>
++#include <fstream>
+ #include <string>
++
++
++int main(int argc, char const *argv[])
++{
++	
++
++	return 0;
++}
+\ No newline at end of file
+diff --git a/coursera/.DS_Store b/coursera/.DS_Store
+new file mode 100644
+index 0000000..111c1b4
+Binary files /dev/null and b/coursera/.DS_Store differ
