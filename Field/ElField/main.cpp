@@ -30,9 +30,9 @@ public:
 		return charge_value;
 	}
 	void WriteDataToFile(ofstream &fout){
-		fout << "Particle parameters:"       << endl;
-		fout << "\tPosition_X = "  << position_x  << endl;
-		fout << "\tPosition_Y = "  << position_y  << endl;
+		fout << "Particle parameters:"              << endl;
+		fout << "\tPosition_X = "   << position_x   << endl;
+		fout << "\tPosition_Y = "   << position_y   << endl;
 		fout << "\tCharge_value = " << charge_value << endl;
 	}
 	// ~ChargeProperties();
@@ -80,15 +80,19 @@ private:
 };
 
 template <typename T>
-void WriteVectorToFile(vector <vector <T> > &v){
+void WriteVectorToFile(vector <vector <T> > &v, 
+	ChargeProperties &Charge, SubstrateProperties &Substrate){
 	ofstream fout("output.txt");
 	if(fout){
 		cout << "Output file is open ..." << endl;
+		Substrate.WriteDataToFile(fout);
+		Charge.WriteDataToFile(fout);
 		for(int i = 0; i != v.size(); i++){
 			for(int j = 0; j != v[i].size(); j++){
 				fout << v[i][j] << ' ';
 			}
 		}
+		fout << endl;
 		fout.close();
 		cout<< "Output file was closed." << endl;
 	}else
@@ -102,7 +106,7 @@ int main(){
 	substrate.set_dimnension(100);
 
 	ChargeProperties charges;
-	charges.set_charge(1);
+	charges.set_charge(10);
 	charges.set_position_x(2.5);
 	charges.set_position_y(4);
 
@@ -133,7 +137,7 @@ int main(){
 			data[i][j] = charge/(pow(position_x, 2) + pow(position_y,2));
 		}
 	}
-	WriteVectorToFile(data);
+	WriteVectorToFile(data, charges, substrate);
 
 
 }
