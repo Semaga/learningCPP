@@ -3,20 +3,28 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <vector>
+#include <sstream>
+
 
 using namespace std;
 
-vector <string> split (string &s, char delimiter = ' ');
+template <typename T>
+void PrintVec(vector <T> &v);
+vector <string> split (string &s, char delimiter);
 void WriteRandomNumber(const string &fileName);
-void DoSortFromFile(const string &fileName, vector &v);
+void DoSortFromFile(const string &ReadFileName, const string &WriteFileName, vector <int> &data);
 
 int main(int argc, char const *argv[])
 {
-	string fileName = "dRawFile.txt";
-	WriteRandomNumber(fileName);
-	vector<int> v;
+	string RawFile = "dRawFile.txt";
+	string SortData = "SortData.txt";
+	WriteRandomNumber(RawFile);
+	vector<int> mData;
+	DoSortFromFile(RawFile, SortData, mData);
 	return 0;
 }
+
 
 vector <string> split (string &s, char delimiter = ' ')
 {
@@ -26,6 +34,20 @@ vector <string> split (string &s, char delimiter = ' ')
 	while (getline(ss,item, delimiter))
 		tokens.push_back(item);
 	return tokens;
+}
+
+template <typename T>
+void PrintVec(vector <T> &v)
+{
+	cout << "PrintVec:" << endl;
+	cout << "\t" << endl;
+	for(const auto &i:v)
+	{
+		cout << fixed;
+		cout.precision(7);
+		cout << i << ' ';
+	}
+	cout << endl;
 }
 
 
@@ -44,14 +66,40 @@ void WriteRandomNumber(const string &fileName)
 		cout << "\tError" << "\n\tfile " << fileName << " not found" << endl;
 }
 
-void DoSortFromFile(const string &fileName, vector &v)
+void DoSortFromFile(const string &ReadFileName, const string &WriteFileName, vector <int> &data)
 {
-	ifstream fin(fileName); //
+	ifstream fin(ReadFileName); //
+	ofstream fout(WriteFileName);
 	if(fin)
 	{
-		string line;
-		getline(fin, line);
+		cout << "\tFile " << ReadFileName << " is open ... " << endl;
+		cout << "\t\tRead from " << ReadFileName << endl;
 
+		string line;
+		vector<string> v;
+		getline(fin, line);
+		fin.close();
+		v = split(line);
+		for (auto &i:v)
+		{
+			data.push_back(stoi(i));
+		}
+		PrintVec(data);
+		sort(data.begin(), data.end());
+		PrintVec(data);
 	}else
-		cout << "\tError" << "\n\tfile " << fileName << " not found" << endl;
+		cout << "\tError" << "\n\tfile " << ReadFileName << " not found" << endl;
+
+		if (fout){
+			cout << "\tFile " << WriteFileName << " is open ... " << endl;
+			cout << "\t\tWrite to " << WriteFileName << endl;
+			for(int i = 0; i < data.size(); i++){
+				fout << data[i] << " ";
+			}
+			fout.close();
+			cout << "\tFile " << WriteFileName << " was closed ... " << endl;
+
+		}else
+		cout << "\tError" << "\n\tfile " << WriteFileName << " not found" << endl;
+
 }
