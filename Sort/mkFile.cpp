@@ -53,7 +53,6 @@ void PrintVec(vector <T> &v)
 	cout << endl;
 }
 
-
 void WriteRandomNumber(const string &fileName)
 {
 	ofstream fout(fileName); //ofstream using for write to file
@@ -103,7 +102,6 @@ void DoSortFromFile(const string &ReadFileName, const string &WriteFileName, vec
 			WriteVectorToFile(WriteFileName, data, ' ');
 		}else
 		cout << "\tError" << "\n\tfile " << WriteFileName << " not found" << endl;
-
 }
 
 template <typename T>
