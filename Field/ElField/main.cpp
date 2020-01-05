@@ -9,14 +9,14 @@ using namespace std;
 
 class ChargeProperties{
 public:
-	ChargeProperties();
-	void set_position_x(double &x){
+	// ChargeProperties();
+	void set_position_x(const double &x){
 		position_x = x;
 	}
-	void set_position_y(double &y){
+	void set_position_y(const double &y){
 		position_y = y;
 	}
-	void set_charge(double &charge){
+	void set_charge(const  double &charge){
 		charge_value = charge;
 	}
 
@@ -30,7 +30,7 @@ public:
 		return charge_value;
 	}
 
-	~ChargeProperties();
+	// ~ChargeProperties();
 private:
 	double charge_value;
 	double position_x;
@@ -39,15 +39,15 @@ private:
 
 class SubstrateProperties{
 public:
-	SubstrateProperties();
-	void set_leght_x(double &lenght_x){
-		lenght_x = lenght_x;
+	// SubstrateProperties();
+	void set_lenght_x(const  double &x){
+		lenght_x = x;
 	}
-	void set_leght_y(double &lenght_y){
-		lenght_y = lenght_y;
+	void set_lenght_y(const double &y){
+		lenght_y = y;
 	}
-	void set_dimnension(int &dimension){
-		dimension = dimension;
+	void set_dimnension(const int &d){
+		dimension = d;
 	}
 
 	double get_lenght_x(){
@@ -60,7 +60,7 @@ public:
 		return dimension;
 	}
 
-	~SubstrateProperties();
+	// ~SubstrateProperties();
 private:
 	double lenght_x;
 	double lenght_y;
@@ -85,15 +85,26 @@ void WriteVectorToFile(vector <vector <T> > &v){
 }
 
 int main(){
-	int dimension = 100;
+	SubstrateProperties substrate;
+	substrate.set_lenght_x(5.0);
+	substrate.set_lenght_y(5.0);
+	substrate.set_dimnension(100);
+
+	ChargeProperties charges;
+	charges.set_charge(1);
+	charges.set_position_x(2.5);
+	charges.set_position_y(4);
+
+	int dimension = substrate.get_dimension();
 	//Set dimenstions of unit's part
-	double lenght_x = 5.0, lenght_y = 5.0;
+	double lenght_x = substrate.get_lenght_x();
+	double lenght_y = substrate.get_lenght_y();
 	// set lenght both side our cell
-	double charge = 1.0;
+	double charge = charges.get_charge();
 	//put unit charge
 	//in left-upper connor;
-	double start_position_x = 2.5;
-	double start_position_y = 2.5;
+	double start_position_x = charges.get_position_x();
+	double start_position_y = charges.get_position_y();
 	//define initial position
 	double position_x = 0.0, position_y = 0.0; 
 
