@@ -3,11 +3,11 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
-class ChargeProperties
-{
+class ChargeProperties{
 public:
 	ChargeProperties();
 	void set_position_x(double x){
@@ -38,13 +38,51 @@ private:
 	double position_y;
 };
 
+template <typename T>
+void WriteVectorToFile(vector <vector <T> > &v){
+	ofstream fout("output.txt");
+	if(fout){
+		cout << "Output file is open ..." << endl;
+		for(int i = 0; i != v.size(); i++){
+			for(int j = 0; j != v[i].size(); j++){
+				fout << v[i][j] << ' ';
+			}
+		}
+		fout.close();
+		cout<< "Output file was closed." << endl;
+	}else
+		cout << "Error file output.txt not found" << endl;
+	
+}
+
 int main(){
 	int dimension = 100;
 	//Set dimenstions of unit's part
+	double lenght_x = 5.0, lenght_y = 5.0;
+	// set lenght both side our cell
+	double charge = 1.0;
+	//put unit charge
+	//in left-upper connor;
+	double start_position_x = 0.1;
+	double start_position_y = 0.1;
+	//define initial position
+	double position_x = 0.0, position_y = 0.0; 
+
 	vector <vector <double> > data(dimension, vector<double> (dimension));
 	//2D Vector for result of calculation
 	//In this vector will put data's modulation
-	double charge = 1;
-	//put unit charge
-	//in center cell 
+	 
+	double delta_x = lenght_x/dimension;
+	double delta_y = lenght_y/dimension;
+
+	for(int i = 0; i != data.size(); i++){
+		for(int j = 0; j != data[i].size(); j++){
+			position_x = start_position_x - i*delta_x;
+			position_y = start_position_y - j*delta_y;
+			data[i][j] = charge/(pow(position_x, 2) + pow(position_y,2));
+		}
+	}
+	WriteVectorToFile(data);
+
+
 }
