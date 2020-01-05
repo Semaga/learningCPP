@@ -16,7 +16,7 @@ public:
 	void set_position_y(double &y){
 		position_y = y;
 	}
-	void set_charge(double &harge){
+	void set_charge(double &charge){
 		charge_value = charge;
 	}
 
@@ -92,8 +92,8 @@ int main(){
 	double charge = 1.0;
 	//put unit charge
 	//in left-upper connor;
-	double start_position_x = 0.1;
-	double start_position_y = 0.1;
+	double start_position_x = 2.5;
+	double start_position_y = 2.5;
 	//define initial position
 	double position_x = 0.0, position_y = 0.0; 
 
