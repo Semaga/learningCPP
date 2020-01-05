@@ -15,6 +15,9 @@ vector <string> split (string &s, char delimiter);
 void WriteRandomNumber(const string &fileName);
 void DoSortFromFile(const string &ReadFileName, const string &WriteFileName, vector <int> &data);
 
+template <typename T>
+void WriteVectorToFile(const string &WriteFileName, vector <T> &v, char delimiter = ' ');
+
 int main(int argc, char const *argv[])
 {
 	string RawFile = "dRawFile.txt";
@@ -84,22 +87,45 @@ void DoSortFromFile(const string &ReadFileName, const string &WriteFileName, vec
 		{
 			data.push_back(stoi(i));
 		}
-		PrintVec(data);
-		sort(data.begin(), data.end());
-		PrintVec(data);
+		// PrintVec(data);
+		int t;
+		cout << "\t\t";
+		cout << "Which algorithm you want to use?" << endl;
+		cout << "Standart from std::vector - (press 1) "; cin >> t;
+		if (t == 1) 
+			sort(data.begin(), data.end());
+			cout << "Sorting is done " << endl;	
+		// PrintVec(data);
 	}else
 		cout << "\tError" << "\n\tfile " << ReadFileName << " not found" << endl;
 
 		if (fout){
-			cout << "\tFile " << WriteFileName << " is open ... " << endl;
-			cout << "\t\tWrite to " << WriteFileName << endl;
-			for(int i = 0; i < data.size(); i++){
-				fout << data[i] << " ";
-			}
-			fout.close();
-			cout << "\tFile " << WriteFileName << " was closed ... " << endl;
-
+			WriteVectorToFile(WriteFileName, data, ' ');
 		}else
 		cout << "\tError" << "\n\tfile " << WriteFileName << " not found" << endl;
 
 }
+
+template <typename T>
+void WriteVectorToFile(const string &WriteFileName, vector <T> &v, 
+											 char delimiter)
+{
+	cout << "\t\tFucktion @WriteVectorToFile@ is ON" << endl;
+	cout << "\t\t************************************" << endl;
+	ofstream fout(WriteFileName);
+	if(fout)
+	{
+		cout << "\t\t\tFile "<< WriteFileName <<" was open" << endl;
+		for (const auto &i:v)
+		{
+			fout << i << delimiter;
+		}
+		cout << "\t\t\tRecording completed" << endl;
+		fout.close();
+		cout << "\t\t\tFile was closed" << endl;
+		cout << "\t\t************************************" << endl;
+
+	}else
+		cout << "Error, file "<< WriteFileName <<" not found ..." << endl;
+}
+
