@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <cmath>
+#include <time.h>
 
 using namespace std;
 
@@ -81,12 +82,16 @@ private:
 
 template <typename T>
 void WriteVectorToFile(vector <vector <T> > &v, 
-	ChargeProperties &Charge, SubstrateProperties &Substrate){
+	vector <ChargeProperties> &Charge, SubstrateProperties &Substrate){
 	ofstream fout("output.txt");
 	if(fout){
 		cout << "Output file is open ..." << endl;
 		Substrate.WriteDataToFile(fout);
-		Charge.WriteDataToFile(fout);
+		for(auto &i:Charge){
+			i.WriteDataToFile(fout);
+		} 
+		// Charge.WriteDataToFile(fout);
+		fout << "Data:" << endl;
 		for(int i = 0; i != v.size(); i++){
 			for(int j = 0; j != v[i].size(); j++){
 				fout << v[i][j] << ' ';
@@ -103,26 +108,28 @@ int main(){
 	SubstrateProperties substrate;
 	substrate.set_lenght_x(5.0);
 	substrate.set_lenght_y(5.0);
-	substrate.set_dimnension(100);
+	substrate.set_dimnension(10);
 
-	ChargeProperties charges;
-	charges.set_charge(10);
-	charges.set_position_x(2.5);
-	charges.set_position_y(4);
-
-	int dimension = substrate.get_dimension();
+	vector<ChargeProperties> Charges(2);
 	//Set dimenstions of unit's part
+	int dimension = substrate.get_dimension();
+	// set lenght both side our cell
 	double lenght_x = substrate.get_lenght_x();
 	double lenght_y = substrate.get_lenght_y();
-	// set lenght both side our cell
-	double charge = charges.get_charge();
 	//put unit charge
-	//in left-upper connor;
-	double start_position_x = charges.get_position_x();
-	double start_position_y = charges.get_position_y();
+	Charges[0].set_charge(1);
 	//define initial position
-	double position_x = 0.0, position_y = 0.0; 
+	Charges[0].set_position_x(2.5);
+	Charges[0].set_position_y(4);
+	srand (time(NULL));
+	Charges[1].set_charge(1);
+	//define initial position
+	Charges[1].set_position_x(rand()%5);
+	Charges[1].set_position_y(rand()%5);
+	
 
+
+	
 	vector <vector <double> > data(dimension, vector<double> (dimension));
 	//2D Vector for result of calculation
 	//In this vector will put data's modulation
@@ -130,14 +137,28 @@ int main(){
 	double delta_x = lenght_x/dimension;
 	double delta_y = lenght_y/dimension;
 
+	//zero the vector
 	for(int i = 0; i != data.size(); i++){
 		for(int j = 0; j != data[i].size(); j++){
-			position_x = start_position_x - i*delta_x;
-			position_y = start_position_y - j*delta_y;
-			data[i][j] = charge/(pow(position_x, 2) + pow(position_y,2));
+			data[i][j] = 0;
 		}
 	}
-	WriteVectorToFile(data, charges, substrate);
+
+	for(int k = 0; k != Charges.size(); k++){
+		double position_x = 0.0, position_y = 0.0, R=0; 
+		for(int i = 0; i != data.size(); i++){
+			for(int j = 0; j != data[i].size(); j++){
+				position_x = Charges[k].get_position_x() - i*delta_x;
+				position_y = Charges[k].get_position_y() - j*delta_y;
+				R = (pow(position_x, 2) + pow(position_y,2));
+				data[i][j] += Charges[k].get_charge()/R;
+			}
+		}
+	}
+
+	
+
+	WriteVectorToFile(data, Charges, substrate);
 
 
 }
