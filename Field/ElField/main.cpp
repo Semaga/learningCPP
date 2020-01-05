@@ -29,7 +29,12 @@ public:
 	double get_charge(){
 		return charge_value;
 	}
-
+	void WriteDataToFile(ofstream &fout){
+		fout << "Particle parameters:"       << endl;
+		fout << "\tPosition_X = "  << position_x  << endl;
+		fout << "\tPosition_Y = "  << position_y  << endl;
+		fout << "\tCharge_value = " << charge_value << endl;
+	}
 	// ~ChargeProperties();
 private:
 	double charge_value;
@@ -60,6 +65,13 @@ public:
 		return dimension;
 	}
 
+	void WriteDataToFile(ofstream &fout){
+		fout << "Substrate parameters:"       << endl;
+		fout << "\tLenght_X = "  << lenght_x  << endl;
+		fout << "\tLenght_Y = "  << lenght_y  << endl;
+		fout << "\tDimension = " << dimension << endl;
+	}
+
 	// ~SubstrateProperties();
 private:
 	double lenght_x;
@@ -81,7 +93,6 @@ void WriteVectorToFile(vector <vector <T> > &v){
 		cout<< "Output file was closed." << endl;
 	}else
 		cout << "Error file output.txt not found" << endl;
-	
 }
 
 int main(){
