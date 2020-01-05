@@ -6,24 +6,27 @@
 
 using namespace std;
 
-void MakeRandomNumber(ofstream &fout)
+void MakeRandomNumber(const string &fileName)
 {
 	int x;
-	cout << "RAND_MAX = " << RAND_MAX << endl; // константа, хранящая максимальный предел из интервала случайных чисел
-  for(int i = 0; i< 10000; i++)
-  {	
-  	x = rand();
-  	cout << "random number = " << x << endl;
-  	fout << x << endl;
-	}
+	ofstream input(fileName); //ofstream using for write to file
+	if(input)
+	{
+		for(int i = 0; i < 10000; i++)
+  	{		
+  		x = rand();
+  		cout << "random number = " << x << endl;
+  		input << x << endl;
+		}	
+		input.close();
+	}else
+		cout << "\tError" << "\n\tfile " << fileName << " not found" << endl;
 }
 
 int main(int argc, char const *argv[])
 {
-	ofstream fout ("dFile.txt");
-	fout << "Work with files" << endl;
-	MakeRandomNumber(fout);
-	fout.close();
+	string fileName = "dRawFile.txt";
+	MakeRandomNumber(fileName);
 
 	return 0;
 }
