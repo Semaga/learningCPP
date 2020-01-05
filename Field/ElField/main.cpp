@@ -10,13 +10,13 @@ using namespace std;
 class ChargeProperties{
 public:
 	ChargeProperties();
-	void set_position_x(double x){
+	void set_position_x(double &x){
 		position_x = x;
 	}
-	void set_position_y(double y){
+	void set_position_y(double &y){
 		position_y = y;
 	}
-	void set_charge(double charge){
+	void set_charge(double &harge){
 		charge_value = charge;
 	}
 
@@ -26,7 +26,6 @@ public:
 	double get_position_y(){
 		return position_y;
 	}
-
 	double get_charge(){
 		return charge_value;
 	}
@@ -36,6 +35,36 @@ private:
 	double charge_value;
 	double position_x;
 	double position_y;
+};
+
+class SubstrateProperties{
+public:
+	SubstrateProperties();
+	void set_leght_x(double &lenght_x){
+		lenght_x = lenght_x;
+	}
+	void set_leght_y(double &lenght_y){
+		lenght_y = lenght_y;
+	}
+	void set_dimnension(int &dimension){
+		dimension = dimension;
+	}
+
+	double get_lenght_x(){
+		return lenght_x;
+	}
+	double get_lenght_y(){
+		return lenght_y;
+	}
+	int get_dimension(){
+		return dimension;
+	}
+
+	~SubstrateProperties();
+private:
+	double lenght_x;
+	double lenght_y;
+	int dimension;
 };
 
 template <typename T>
