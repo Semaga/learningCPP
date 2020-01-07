@@ -36,13 +36,13 @@ void WriteVectorToFile(std::vector <std::vector <T> > &v,
 		std::cout << "Error file output.txt not found" << std::endl;
 }
 
-void VecorToZero(std::vector <std::vector <double> >&v){
-	for(int i = 0; i != v.size(); i++){
-		for(int j = 0; j != v[i].size(); j ++){
-			v[i][j] = 0;
-		}
-	}
-}
+// void VecorToZero(std::vector <std::vector <double> >&v){
+// 	for(int i = 0; i != v.size(); i++){
+// 		for(int j = 0; j != v[i].size(); j ++){
+// 			v[i][j] = 0;
+// 		}
+// 	}
+// }
 
 int main(int argc, char const *argv[]){
 	SUB_PRP substrate;
