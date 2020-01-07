@@ -8,7 +8,7 @@
 
 using namespace std;
 
-class ChargeProperties{
+class CHR_PRP{
 public:
 	// ChargeProperties();
 	void set_position_x(const double &x){
@@ -82,7 +82,7 @@ private:
 
 template <typename T>
 void WriteVectorToFile(vector <vector <T> > &v, 
-	vector <ChargeProperties> &Charge, SubstrateProperties &Substrate){
+	vector <CHR_PRP> &Charge, SubstrateProperties &Substrate){
 	ofstream fout("output.txt");
 	if(fout){
 		cout << "Output file is open ..." << endl;
@@ -104,13 +104,13 @@ void WriteVectorToFile(vector <vector <T> > &v,
 		cout << "Error file output.txt not found" << endl;
 }
 
-int main(){
+int main(int argc, char const *argv[]){
 	SubstrateProperties substrate;
-	substrate.set_lenght_x(5.0);
-	substrate.set_lenght_y(5.0);
-	substrate.set_dimnension(10);
+	substrate.set_lenght_x(5.0);  //cantimeter
+	substrate.set_lenght_y(5.0);  //cantimeter
+	substrate.set_dimnension(50); 
 
-	vector<ChargeProperties> Charges(2);
+	vector<CHR_PRP> Charges(2);
 	//Set dimenstions of unit's part
 	int dimension = substrate.get_dimension();
 	// set lenght both side our cell
@@ -119,9 +119,10 @@ int main(){
 	//put unit charge
 	Charges[0].set_charge(1);
 	//define initial position
-	Charges[0].set_position_x(2.5);
-	Charges[0].set_position_y(4);
 	srand (time(NULL));
+	Charges[0].set_position_x(rand()%5); //cantimeter
+	Charges[0].set_position_y(rand()%5);   //cantimeter
+	// srand (time(NULL));
 	Charges[1].set_charge(1);
 	//define initial position
 	Charges[1].set_position_x(rand()%5);
@@ -160,5 +161,5 @@ int main(){
 
 	WriteVectorToFile(data, Charges, substrate);
 
-
+	return 0;
 }
