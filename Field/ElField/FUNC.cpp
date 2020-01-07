@@ -36,3 +36,57 @@ void WriteVectorToFile(std::vector <std::vector <double> > &v,
 	}else
 		std::cout << "Error file output.txt not found" << std::endl;
 }
+
+void ReadInputFile(const std::string &InputeFile, SUB_PRP &Substrate, int &NumberOfParticle){
+	std::cout << "Try to open inpute file" << std::endl;
+	std::ifstream fin(InputeFile);
+	std::vector <std::string> s;
+	if(fin){
+
+		std::cout << "\tInput file is open" << std::endl;
+		std::string line;
+		double param;
+		int chec;
+		getline(fin, line);
+		getline(fin, line);
+		s = split(line);
+		param = stod(s[2]);
+		std::cout << "\t\tLenght is equal " << param << std::endl; 
+		Substrate.set_lenght_x(param);
+
+		
+		getline(fin, line);
+		s = split(line);
+		param = stod(s[2]);	
+		std::cout << "\t\tWildth is equal " << param << std::endl; 
+		Substrate.set_lenght_y(param);
+		std::cout << "\t\tLenght and wildth of substrate was read ..." << std::endl;
+
+		getline(fin, line);
+		getline(fin, line);
+		s = split(line);
+		chec = stoi(s[2]);	
+		std::cout << "\t\tDimenstion is equal " << chec << std::endl; 		
+		Substrate.set_dimnension(chec);
+		std::cout << "\t\tDimenstion of calculation was read ..." << std::endl;
+
+		getline(fin, line);
+		getline(fin, line);
+		s = split(line);
+		chec = stoi(s[4]);	
+		std::cout << "\t\tNumber of particles is equal " << param << std::endl; 
+		NumberOfParticle = chec;
+		std::cout << "\t\tNumber of particles was read ..." << std::endl;
+
+	}
+}
+
+std::vector <std::string> split(std::string & s, char delimeter){
+	std::stringstream ss(s);
+	std::string item;
+	std::vector<std::string> tokens;
+	while (getline(ss, item, delimeter)){
+		tokens.push_back(item);
+	}
+	return tokens;
+}

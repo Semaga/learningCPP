@@ -12,38 +12,16 @@
 #include "SUB_PRP.h"
 #include "FUNC.h"
 
-// template <typename T>
-// void WriteVectorToFile(std::vector <std::vector <T> > &v, 
-// 	std::vector <CHR_PRP> &Charge, SUB_PRP &Substrate){
-// 	std::ofstream fout("output.txt");
-// 	if(fout){
-// 		std::cout << "Output file is open ..." << std::endl;
-// 		Substrate.WriteDataToFile(fout);
-// 		for(auto &i:Charge){
-// 			i.WriteDataToFile(fout);
-// 		} 
-// 		// Charge.WriteDataToFile(fout);
-// 		fout << "Data:" << std::endl;
-// 		for(int i = 0; i != v.size(); i++){
-// 			for(int j = 0; j != v[i].size(); j++){
-// 				fout << v[i][j] << ' ';
-// 			}
-// 		}
-// 		fout << std::endl;
-// 		fout.close();
-// 		std::cout<< "Output file was closed." << std::endl;
-// 	}else
-// 		std::cout << "Error file output.txt not found" << std::endl;
-// }
-
 
 int main(int argc, char const *argv[]){
 	SUB_PRP substrate;
-
 	//Set paramaters of cell wildth and lenght, fragmentation
-	substrate.set_lenght_x(5.0);  //centimeters
-	substrate.set_lenght_y(5.0);  //centimeters
-	substrate.set_dimnension(100); 
+	int NumberOfParticle;
+	ReadInputFile("InputFile.txt", substrate, NumberOfParticle);
+
+	// substrate.set_lenght_x(5.0);  //centimeters
+	// substrate.set_lenght_y(5.0);  //centimeters
+	// substrate.set_dimnension(100); 
 
 	//Put data of substrate to variables
 	int dimension = substrate.get_dimension();
@@ -51,11 +29,11 @@ int main(int argc, char const *argv[]){
 	double lenght_y = substrate.get_lenght_y();
 	
 	//make vector with Charges properties
-	std::vector<CHR_PRP> Charges(10);
+	std::vector<CHR_PRP> Charges(NumberOfParticle);
 
 	srand (time(NULL));
 	for (int i = 0; i != Charges.size(); i++){
-		Charges[i].set_charge(1);                //set unit charhe
+		Charges[i].set_charge(1);                                //set unit charhe
 		Charges[i].set_position_x(lenght_x / RAND_MAX * rand()); //set position in centimeters
 		Charges[i].set_position_y(lenght_y / RAND_MAX * rand()); //set position in centimeters 		
 	}	
@@ -83,6 +61,5 @@ int main(int argc, char const *argv[]){
 	}
 
 	WriteVectorToFile(data, Charges, substrate);
-
 	return 0;
 }
