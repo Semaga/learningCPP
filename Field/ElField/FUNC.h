@@ -16,6 +16,8 @@ void WriteVectorToFile(std::vector <std::vector <double> > &v, std::vector <CHR_
 
 void ReadInputFile(const std::string &InputeFile, SUB_PRP &Substrate, int &NumberOfParticle);
 
+void WriteMessage(const std::string &s, const std:: string &PositionFile);
+
 std::vector <std::string> split(std::string & s, char delimeter = ' ');
 
 #endif

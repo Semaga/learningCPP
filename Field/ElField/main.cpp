@@ -19,10 +19,6 @@ int main(int argc, char const *argv[]){
 	int NumberOfParticle;
 	ReadInputFile("InputFile.txt", substrate, NumberOfParticle);
 
-	// substrate.set_lenght_x(5.0);  //centimeters
-	// substrate.set_lenght_y(5.0);  //centimeters
-	// substrate.set_dimnension(100); 
-
 	//Put data of substrate to variables
 	int dimension = substrate.get_dimension();
 	double lenght_x = substrate.get_lenght_x();
@@ -30,23 +26,34 @@ int main(int argc, char const *argv[]){
 	
 	//make vector with Charges properties
 	std::vector<CHR_PRP> Charges(NumberOfParticle);
-
+	WriteMessage("Start to write particles's position", "main");
 	srand (time(NULL));
 	for (int i = 0; i != Charges.size(); i++){
-		Charges[i].set_charge(1);                                //set unit charhe
-		Charges[i].set_position_x(lenght_x / RAND_MAX * rand()); //set position in centimeters
-		Charges[i].set_position_y(lenght_y / RAND_MAX * rand()); //set position in centimeters 		
+		Charges[i].set_charge(1);                                                           //set unit charhe
+		double posx = 0;
+		posx = lenght_x / RAND_MAX * rand();
+		if (posx >= lenght_x){
+			posx =  2*lenght_x - posx;
+		}
+		Charges[i].set_position_x(posx);                                                    //set position in centimeters
+		posx = lenght_y / RAND_MAX * rand();
+		if (posx >= lenght_y){
+			posx =  2*lenght_y - posx;
+		}
+		Charges[i].set_position_y(lenght_y / RAND_MAX * rand());                            //set position in centimeters 		
 	}	
-
+	WriteMessage("Particles's position was write", "main");
 	std::vector <std::vector <double> > data(dimension, std::vector<double> (dimension));
+	WriteMessage("Make vector for writing data", "main");
 	//2D Vector for result of calculation
 	//In this vector will put data's modulation
 	 
-	double delta_x = lenght_x/dimension; //fragmentation along x-axes
-	double delta_y = lenght_y/dimension; //fragmentation along y-axes
+	double delta_x = lenght_x/dimension;                                                  //fragmentation along x-axes
+	double delta_y = lenght_y/dimension;                                                  //fragmentation along y-axes
 
 	//zero the vector
 	// VectorToZero(data);
+	WriteMessage("Calculate and write data in vector", "main");
 
 	for(int k = 0; k != Charges.size(); k++){
 		double position_x = 0.0, position_y = 0.0, R=0; 
@@ -59,6 +66,7 @@ int main(int argc, char const *argv[]){
 			}
 		}
 	}
+	WriteMessage("Data was write in vector", "main");
 
 	WriteVectorToFile(data, Charges, substrate);
 	return 0;
