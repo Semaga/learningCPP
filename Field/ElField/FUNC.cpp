@@ -90,5 +90,5 @@ std::vector <std::string> split(std::string & s, char delimeter){
 }
 
 void WriteMessage(const std::string &s, const std:: string &PositionFile){
-	std::cout << '\t' << "Message from " << PositionFile <<" file :\t" << s << std::endl;
+	std::cout << '\t' << "Message from " << PositionFile <<" function :\t" << s << std::endl;
 }

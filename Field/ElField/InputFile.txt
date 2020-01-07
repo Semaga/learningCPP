@@ -2,6 +2,6 @@ Substrate:
 	Lenght_x = 5.0
 	Lenght_y = 5.0
 Parameters of calculation:
-	Dimenstion = 100
+	Dimenstion = 500
 Other parameters:
-	Number of electrons = 10
+	Number of electrons = 33
