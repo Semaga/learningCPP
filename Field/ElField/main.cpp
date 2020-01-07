@@ -8,40 +8,8 @@
 
 using namespace std;
 
-class CHR_PRP{
-public:
-	// ChargeProperties();
-	void set_position_x(const double &x){
-		position_x = x;
-	}
-	void set_position_y(const double &y){
-		position_y = y;
-	}
-	void set_charge(const  double &charge){
-		charge_value = charge;
-	}
-
-	double get_position_x(){
-		return position_x;
-	}
-	double get_position_y(){
-		return position_y;
-	}
-	double get_charge(){
-		return charge_value;
-	}
-	void WriteDataToFile(ofstream &fout){
-		fout << "Particle parameters:"              << endl;
-		fout << "\tPosition_X = "   << position_x   << endl;
-		fout << "\tPosition_Y = "   << position_y   << endl;
-		fout << "\tCharge_value = " << charge_value << endl;
-	}
-	// ~ChargeProperties();
-private:
-	double charge_value;
-	double position_x;
-	double position_y;
-};
+#include "CHR_PRP.h"
+#include "SUB_PRP.h"
 
 class SubstrateProperties{
 public:
