@@ -11,46 +11,10 @@ using namespace std;
 #include "CHR_PRP.h"
 #include "SUB_PRP.h"
 
-class SubstrateProperties{
-public:
-	// SubstrateProperties();
-	void set_lenght_x(const  double &x){
-		lenght_x = x;
-	}
-	void set_lenght_y(const double &y){
-		lenght_y = y;
-	}
-	void set_dimnension(const int &d){
-		dimension = d;
-	}
-
-	double get_lenght_x(){
-		return lenght_x;
-	}
-	double get_lenght_y(){
-		return lenght_y;
-	}
-	int get_dimension(){
-		return dimension;
-	}
-
-	void WriteDataToFile(ofstream &fout){
-		fout << "Substrate parameters:"       << endl;
-		fout << "\tLenght_X = "  << lenght_x  << endl;
-		fout << "\tLenght_Y = "  << lenght_y  << endl;
-		fout << "\tDimension = " << dimension << endl;
-	}
-
-	// ~SubstrateProperties();
-private:
-	double lenght_x;
-	double lenght_y;
-	int dimension;
-};
 
 template <typename T>
 void WriteVectorToFile(vector <vector <T> > &v, 
-	vector <CHR_PRP> &Charge, SubstrateProperties &Substrate){
+	vector <CHR_PRP> &Charge, SUB_PRP &Substrate){
 	ofstream fout("output.txt");
 	if(fout){
 		cout << "Output file is open ..." << endl;
@@ -73,7 +37,7 @@ void WriteVectorToFile(vector <vector <T> > &v,
 }
 
 int main(int argc, char const *argv[]){
-	SubstrateProperties substrate;
+	SUB_PRP substrate;
 	substrate.set_lenght_x(5.0);  //cantimeter
 	substrate.set_lenght_y(5.0);  //cantimeter
 	substrate.set_dimnension(50); 
@@ -97,8 +61,6 @@ int main(int argc, char const *argv[]){
 	Charges[1].set_position_y(rand()%5);
 	
 
-
-	
 	vector <vector <double> > data(dimension, vector<double> (dimension));
 	//2D Vector for result of calculation
 	//In this vector will put data's modulation
@@ -124,8 +86,6 @@ int main(int argc, char const *argv[]){
 			}
 		}
 	}
-
-	
 
 	WriteVectorToFile(data, Charges, substrate);
 
