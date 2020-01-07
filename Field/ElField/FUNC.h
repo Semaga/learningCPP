@@ -1,8 +1,10 @@
 #ifndef FUNC_H
 #define FUNC_H
 
+#include <fstream>
 #include <iostream>
 #include <vector>
+
 #include "CHR_PRP.h"
 #include "SUB_PRP.h"
 

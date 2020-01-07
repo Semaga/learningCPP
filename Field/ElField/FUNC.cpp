@@ -1,5 +1,4 @@
 #include "FUNC.h"
-#include <iostream>
 
 template <typename T>
 void WriteVectorToFile(std::vector <std::vector <T> > &v, 

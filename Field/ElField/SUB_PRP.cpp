@@ -1,6 +1,5 @@
 #include "SUB_PRP.h"
 
-
 void SUB_PRP::set_lenght_x(  const  double &x){
 	lenght_x = x;
 }

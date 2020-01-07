@@ -1,42 +1,42 @@
 //Try to calculate electric field of some electric charges
 
+//Import stadardt header files
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <cmath>
 #include <time.h>
 
-using namespace std;
-
+//Import own header files
 #include "CHR_PRP.h"
 #include "SUB_PRP.h"
-// #include "FUNC.h"
+#include "FUNC.h"
 
 template <typename T>
-void WriteVectorToFile(vector <vector <T> > &v, 
-	vector <CHR_PRP> &Charge, SUB_PRP &Substrate){
-	ofstream fout("output.txt");
+void WriteVectorToFile(std::vector <std::vector <T> > &v, 
+	std::vector <CHR_PRP> &Charge, SUB_PRP &Substrate){
+	std::ofstream fout("output.txt");
 	if(fout){
-		cout << "Output file is open ..." << endl;
+		std::cout << "Output file is open ..." << std::endl;
 		Substrate.WriteDataToFile(fout);
 		for(auto &i:Charge){
 			i.WriteDataToFile(fout);
 		} 
 		// Charge.WriteDataToFile(fout);
-		fout << "Data:" << endl;
+		fout << "Data:" << std::endl;
 		for(int i = 0; i != v.size(); i++){
 			for(int j = 0; j != v[i].size(); j++){
 				fout << v[i][j] << ' ';
 			}
 		}
-		fout << endl;
+		fout << std::endl;
 		fout.close();
-		cout<< "Output file was closed." << endl;
+		std::cout<< "Output file was closed." << std::endl;
 	}else
-		cout << "Error file output.txt not found" << endl;
+		std::cout << "Error file output.txt not found" << std::endl;
 }
 
-void VecorToZero(vector <vector <double> >&v){
+void VecorToZero(std::vector <std::vector <double> >&v){
 	for(int i = 0; i != v.size(); i++){
 		for(int j = 0; j != v[i].size(); j ++){
 			v[i][j] = 0;
@@ -50,7 +50,7 @@ int main(int argc, char const *argv[]){
 	//Set paramaters of cell wildth and lenght, fragmentation
 	substrate.set_lenght_x(5.0);  //centimeters
 	substrate.set_lenght_y(5.0);  //centimeters
-	substrate.set_dimnension(50); 
+	substrate.set_dimnension(100); 
 
 	//Put data of substrate to variables
 	int dimension = substrate.get_dimension();
@@ -58,16 +58,16 @@ int main(int argc, char const *argv[]){
 	double lenght_y = substrate.get_lenght_y();
 	
 	//make vector with Charges properties
-	vector<CHR_PRP> Charges(2);
-	srand (time(NULL));
+	std::vector<CHR_PRP> Charges(10);
 
+	srand (time(NULL));
 	for (int i = 0; i != Charges.size(); i++){
-		Charges[i].set_charge(1);            //set unit charhe
-		Charges[i].set_position_x(rand()%5); //set position in centimeters
-		Charges[i].set_position_y(rand()%5); //set position in centimeters 		
+		Charges[i].set_charge(1);                //set unit charhe
+		Charges[i].set_position_x(lenght_x / RAND_MAX * rand()); //set position in centimeters
+		Charges[i].set_position_y(lenght_y / RAND_MAX * rand()); //set position in centimeters 		
 	}	
 
-	vector <vector <double> > data(dimension, vector<double> (dimension));
+	std::vector <std::vector <double> > data(dimension, std::vector<double> (dimension));
 	//2D Vector for result of calculation
 	//In this vector will put data's modulation
 	 
