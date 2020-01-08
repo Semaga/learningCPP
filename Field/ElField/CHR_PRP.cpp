@@ -21,8 +21,6 @@ void CHR_PRP::set_energy(         const double &E){
 	energy = E;
 }
 
-
-
 void CHR_PRP::WriteDataToFile(std::ofstream &fout){
 	fout << "Particle parameters:"              << std::endl;
 	fout << "\tPosition_X = "   << position_x   << std::endl;

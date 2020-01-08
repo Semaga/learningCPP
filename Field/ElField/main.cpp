@@ -31,7 +31,7 @@ int main(int argc, char const *argv[]){
 	WriteMessage("Start to write particles's position", "main");
 	srand (time(NULL));
 	for (int i = 0; i != Charges.size(); i++){
-		Charges[i].set_charge(1);                                                           //set unit charhe
+		Charges[i].set_charge(1);                                                           //set unit charge
 		double posx = 0;
 		posx = lenght_x / RAND_MAX * rand();
 		if (posx >= lenght_x){
@@ -50,8 +50,6 @@ int main(int argc, char const *argv[]){
 
 	std::vector <std::vector <double> > EFP(dimension, std::vector<double> (dimension));
 	WriteMessage("Make vector for writing data of EFS", "main");
-
-
 	//2D Vector for result of calculation
 	//In this vector will put data's modulation of Electric Field Strenght
 	 
@@ -60,58 +58,24 @@ int main(int argc, char const *argv[]){
 
 	//zero the vector
 	VectorToZero(EFS);
-	WriteMessage("Calculate EFF and write data in vector", "main");
+	WriteMessage("Calculate EFS and write data in vector", "main");
 
-	for(int k = 0; k != Charges.size(); k++){
-		double position_x = 0.0, position_y = 0.0, R=0; 
-		for(int i = 0; i != EFS.size(); i++){
-			for(int j = 0; j != EFS[i].size(); j++){
-				position_x = Charges[k].get_position_x() - i*delta_x;
-				position_y = Charges[k].get_position_y() - j*delta_y;
-				R = (pow(position_x, 2) + pow(position_y,2));
-				EFS[i][j] += Charges[k].get_charge()/R;
-			}
-		}
-	}
+	CalculateEFS(EFS, Charges, delta_x, delta_y);
+
 	WriteMessage("Data of EFF was write in vector", "main");
 	WriteVectorToFile(OutputFile_EFS, EFS, Charges, substrate);
 
 	VectorToZero(EFP);
 	WriteMessage("Calculate Potantial of EF and write data in vector", "main");
-	for(int k = 0; k != Charges.size(); k++){
-		double position_x = 0.0, position_y = 0.0, R=0; 
-		for(int i = 0; i != EFP.size(); i++){
-			for(int j = 0; j != EFP[i].size(); j++){
-				position_x = Charges[k].get_position_x() - i*delta_x;
-				position_y = Charges[k].get_position_y() - j*delta_y;
-				R = sqrt(pow(position_x, 2) + pow(position_y,2));
-				EFP[i][j] += Charges[k].get_charge()/R;
-			}
-		}
-	}	
+	
+	CalculateEFP(EFP, Charges, delta_x, delta_y);
 	
 	WriteVectorToFile(OutputFile_EFP, EFP, Charges, substrate);
-
+	
 	//Calcaulate forces action to particles
+	CalculateForce(Charges);
 
-	for(int i = 0; i != Charges.size(); i++){
-		//Zeroing components of strenghts action to particle
-		double force_x = 0.0, force_y = 0.0, R2 = 0.0, delta_y = 0.0, delta_x = 0.0;
-
-		for(int j = 0; j != Charges.size(); j++){
-			if (j != i){
-				WriteMessage("Ups, ","CalcForse");
-				delta_x = Charges[i].get_position_x() - Charges[j].get_position_x();
-				delta_y = Charges[i].get_position_y() - Charges[j].get_position_y();
-				R2 = pow(delta_y,2) + pow(delta_x,2);
-				force_x += Charges[i].get_charge() * Charges[j].get_charge() * delta_x/ pow(R2,1.5);
-				force_y += Charges[i].get_charge() * Charges[j].get_charge() * delta_y/ pow(R2,1.5);
-			}
-		}
-		Charges[i].set_action_force_x(force_x);
-		Charges[i].set_action_force_y(force_y);
-		WriteMessage("Force was Calculate for "+std::to_string(i)+ "particle","main");
-	}
-
+	//Calculate Total energy of system
+	double TotalEnergy = CalculateTotalEnergy(Charges);
 	return 0;
 }

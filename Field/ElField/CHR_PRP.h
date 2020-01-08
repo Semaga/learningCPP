@@ -2,7 +2,6 @@
 #define CHR_PRP_H
 
 #include <fstream>
-#include <cmath>
 
 class CHR_PRP{
 
