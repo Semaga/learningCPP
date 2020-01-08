@@ -110,7 +110,8 @@ int main(int argc, char const *argv[]){
 		}
 		Charges[i].set_action_force_x(force_x);
 		Charges[i].set_action_force_y(force_y);
+		WriteMessage("Force was Calculate for "+std::to_string(i)+ "particle","main");
 	}
-	
+
 	return 0;
 }

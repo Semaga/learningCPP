@@ -9,6 +9,9 @@ void SUB_PRP::set_lenght_y(  const double &y){
 void SUB_PRP::set_dimnension(const int &d){
 	dimension = d;
 }
+void SUB_PRP::set_potential(const double &p){
+	potential = p;
+}
 
 void SUB_PRP::WriteDataToFile(std::ofstream &fout){
 	fout << "Substrate parameters:"       << std::endl;

@@ -1,7 +1,10 @@
 Substrate:
-	Lenght_x = 5.0
-	Lenght_y = 5.0
+	Lenght_x = 0.01
+	Lenght_y = 0.01
 Parameters of calculation:
 	Dimenstion = 500
 Other parameters:
-	Number of electrons = 33
+	Number of electrons = 2
+Name of output files:
+	Output EFS-files: outputfile1.txt
+	Output EFP-files: outputfile2.txt
