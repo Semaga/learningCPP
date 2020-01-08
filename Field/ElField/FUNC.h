@@ -12,9 +12,10 @@
 
 void VectorToZero(std::vector <std::vector <double> >&v);
 
-void WriteVectorToFile(std::vector <std::vector <double> > &v, std::vector <CHR_PRP> &Charge, SUB_PRP &Substrate);
+void WriteVectorToFile(const std::string &OutputFile,std::vector <std::vector <double> > &v, std::vector <CHR_PRP> &Charge, SUB_PRP &Substrate);
 
-void ReadInputFile(const std::string &InputeFile, SUB_PRP &Substrate, int &NumberOfParticle);
+void ReadInputFile(const std::string &InputeFile, SUB_PRP &Substrate, int &NumberOfParticle, 
+	std::string &OutputFile_EFS, std::string &OutputFile_EFP);
 
 void WriteMessage(const std::string &s, const std:: string &PositionFile);
 

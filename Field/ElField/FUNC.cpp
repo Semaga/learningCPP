@@ -11,13 +11,15 @@ void VectorToZero(std::vector <std::vector <double> >&v){
 	WriteMessage("Vector Zero","FUNC");
 }
 
-void WriteVectorToFile(std::vector <std::vector <double> > &v, 
+void WriteVectorToFile(const std::string &OutputFile,std::vector <std::vector <double> > &v, 
 	std::vector <CHR_PRP> &Charge, SUB_PRP &Substrate){
 	//Get vectors of result of calculation, ChargeParameters and Substrate parameters 
-	std::ofstream fout("output.txt");
+	std::string s = "Start write the " + OutputFile;
+	WriteMessage(s,"WriteVectorToFile");
+	std::ofstream fout(OutputFile);
 	//Make stream to write-file
 	if(fout){
-		WriteMessage("Output file is open ...","FUNC");
+		WriteMessage("Output file "+OutputFile+ " is open ...","FUNC");
 		Substrate.WriteDataToFile(fout);
 		//Write information about wubstrate
 		for(auto &i:Charge){
@@ -34,12 +36,13 @@ void WriteVectorToFile(std::vector <std::vector <double> > &v,
 		}
 		fout << std::endl;
 		fout.close();
-		WriteMessage("Output file was closed.","FUNC");
+		WriteMessage("File "+OutputFile+" was closed.","FUNC");
 	}else
-		WriteMessage("Error file output.txt not found","FUNC");
+		WriteMessage("Error file "+OutputFile+" not found","FUNC");
 }
 
-void ReadInputFile(const std::string &InputeFile, SUB_PRP &Substrate, int &NumberOfParticle){
+void ReadInputFile(const std::string &InputeFile, SUB_PRP &Substrate, int &NumberOfParticle,
+  std::string &OutputFile_EFS, std::string &OutputFile_EFP){
 	WriteMessage("Try to open inpute file","ReadInputFile");	
 	std::cout << "" << std::endl;
 	std::ifstream fin(InputeFile);
@@ -76,6 +79,18 @@ void ReadInputFile(const std::string &InputeFile, SUB_PRP &Substrate, int &Numbe
 		NumberOfParticle = chec;
 		WriteMessage("\t\tNumber of particles was read ...", "ReadInputFile");
 
+		getline(fin, line);
+		getline(fin, line);
+		s = split(line);
+		OutputFile_EFS = s[2];
+		WriteMessage("\t\tRead name of output file with EFS-data: "+OutputFile_EFS, "ReadInputFile");
+
+		getline(fin, line);
+		s = split(line);
+		OutputFile_EFP = s[2];
+		WriteMessage("\t\tRead name of output file with EFP-data: "+OutputFile_EFP, "ReadInputFile");
+		
+
 	}
 }
 
@@ -90,5 +105,6 @@ std::vector <std::string> split(std::string & s, char delimeter){
 }
 
 void WriteMessage(const std::string &s, const std:: string &PositionFile){
+	std::cout << "\t####" << std::endl;
 	std::cout << '\t' << "Message from " << PositionFile <<" function :\t" << s << std::endl;
 }
