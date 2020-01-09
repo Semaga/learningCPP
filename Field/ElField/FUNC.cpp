@@ -11,7 +11,7 @@ void VectorToZero(std::vector <std::vector <double> >&v){
 }
 
 //Write data from vector to file
-void WriteVectorToFile(const std::string &OutputFile,std::vector <std::vector <double> > &v, 
+void WriteVectorToFile(const std::string &OutputFile, std::vector <std::vector <double> > &v, 
 	std::vector <CHR_PRP> &Charge, SUB_PRP &Substrate){
 	//Get vectors of result of calculation, ChargeParameters and Substrate parameters 
 	std::string s = "Start write the " + OutputFile;
@@ -134,7 +134,7 @@ void CalculateForce(std::vector <CHR_PRP> &Charges){
 		double force_x = 0.0, force_y = 0.0, R2 = 0.0, delta_y = 0.0, delta_x = 0.0;
 		for(int j = 0; j != Charges.size(); j++){
 			if (j != i){
-				WriteMessage("Ups, ","CalculateForce");
+				// WriteMessage("Ups, ","CalculateForce");
 				delta_x = Charges[i].get_position_x() - Charges[j].get_position_x();
 				delta_y = Charges[i].get_position_y() - Charges[j].get_position_y();
 				R2 = pow(delta_y,2) + pow(delta_x,2);
@@ -144,17 +144,18 @@ void CalculateForce(std::vector <CHR_PRP> &Charges){
 		}
 		Charges[i].set_action_force_x(force_x);
 		Charges[i].set_action_force_y(force_y);
-		WriteMessage("Force was Calculate for "+std::to_string(i)+ "particle","CalculateForce");
+		WriteMessage("Force was Calculate for "+std::to_string(i)+ " particle","CalculateForce");
 	}
 }
 
-void CalculateEFS(std::vector <std::vector <double> > &EFS, std::vector <CHR_PRP> Charges, const double delta_x, const double delta_y){
+void CalculateEFS(std::vector <std::vector <double> > &EFS, std::vector <CHR_PRP> &Charges, const double &delta_x, const double &delta_y){
+	double x = delta_x, y = delta_y;
 	for(int k = 0; k != Charges.size(); k++){
 		double position_x = 0.0, position_y = 0.0, R=0; 
 		for(int i = 0; i != EFS.size(); i++){
 			for(int j = 0; j != EFS[i].size(); j++){
-				position_x = Charges[k].get_position_x() - i*delta_x;
-				position_y = Charges[k].get_position_y() - j*delta_y;
+				position_x = Charges[k].get_position_x() - i*x;
+				position_y = Charges[k].get_position_y() - j*y;
 				R = (pow(position_x, 2) + pow(position_y,2));
 				EFS[i][j] += Charges[k].get_charge()/R;
 			}
@@ -162,17 +163,48 @@ void CalculateEFS(std::vector <std::vector <double> > &EFS, std::vector <CHR_PRP
 	}
 }
 
-void CalculateEFP(std::vector <std::vector <double> > &EFP, std::vector <CHR_PRP> Charges, const double delta_x, const double delta_y){
+void CalculateEFP(std::vector <std::vector <double> > &EFP, std::vector <CHR_PRP> &Charges, const double &delta_x, const double &delta_y){
+	double x = delta_x, y = delta_y;
 	for(int k = 0; k != Charges.size(); k++){
 		double position_x = 0.0, position_y = 0.0, R=0; 
 		for(int i = 0; i != EFP.size(); i++){
 			for(int j = 0; j != EFP[i].size(); j++){
-				position_x = Charges[k].get_position_x() - i*delta_x;
-				position_y = Charges[k].get_position_y() - j*delta_y;
+				position_x = Charges[k].get_position_x() - i*x;
+				position_y = Charges[k].get_position_y() - j*y;
 				R = sqrt(pow(position_x, 2) + pow(position_y,2));
 				EFP[i][j] += Charges[k].get_charge()/R;
 			}
 		}
 	}	
-	
+}
+
+void ToLocalMinimum(std::vector <CHR_PRP> &Charges,  SUB_PRP &Substrate, const double &eps){
+	//Shift all particles after that calculate enegy
+	WriteMessage("\t\t@@@@@@","ToLocalMinimum");
+	WriteMessage("\n\t\t\t@@@Start optimize@@@","ToLocalMinimum");
+	int N = 1000;//number of itteration
+	double dR = 0.00001, x, y;
+	for(int n = 0; n!=N; n++){
+		WriteMessage("@@@Start " + std::to_string(n) +" itteration", "ToLocalMinimum");
+		WriteMessage("@@@Start to shift particales","ToLocalMinimum");
+		for (auto &i:Charges){
+			x = i.get_position_x();
+			y = i.get_position_y();	
+			if (i.get_action_force_x() > 0){
+				i.set_position_x(x + dR);
+			}else if(i.get_position_x() < 0){
+				i.set_position_x(x - dR);
+			}
+			if (i.get_action_force_y() > 0){
+				i.set_position_y(y + dR);
+			}else if(i.get_position_y() < 0){
+				i.set_position_y(y - dR);
+			}
+		}
+		WriteMessage("@@@Finish to shift particales","ToLocalMinimum");
+		WriteMessage("@@@Calculate forces is start","ToLocalMinimum");	
+		CalculateForce(Charges);
+		WriteMessage("@@@Calculate forces is OVER","ToLocalMinimum");	
+		WriteMessage("@@@Finish " + std::to_string(n) + " itteration", "ToLocalMinimum");
+	}
 }

@@ -6,6 +6,9 @@ void CHR_PRP::set_position_x(     const double &x){
 void CHR_PRP::set_position_y(     const double &y){
 	position_y = y;
 }
+void CHR_PRP::set_position_z(     const double &z){
+	position_z = z;
+}
 void CHR_PRP::set_charge(         const double &charge){
 	charge_value = charge;
 }

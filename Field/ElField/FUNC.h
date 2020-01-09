@@ -20,14 +20,16 @@ void ReadInputFile(const std::string &InputeFile, SUB_PRP &Substrate, int &Numbe
 
 void WriteMessage(const std::string &s, const std:: string &PositionFile);
 
-std::vector <std::string> split(std::string & s, char delimeter = ' ');
+std::vector <std::string> split(std::string &s, char delimeter = ' ');
 
 double CalculateTotalEnergy(std::vector<CHR_PRP> &Charge);
 
 void CalculateForce(std::vector <CHR_PRP> &Charhe);
 
-void CalculateEFS(std::vector <std::vector <double> > &EFS, std::vector <CHR_PRP> Charges, const double delta_x, const double delta_y);
+void CalculateEFS(std::vector <std::vector <double> > &EFS, std::vector <CHR_PRP> &Charges, const double &delta_x, const double &delta_y);
 
-void CalculateEFP(std::vector <std::vector <double> > &EFS, std::vector <CHR_PRP> Charges, const double delta_x, const double delta_y);
+void CalculateEFP(std::vector <std::vector <double> > &EFS, std::vector <CHR_PRP> &Charges, const double &delta_x, const double &delta_y);
+
+void ToLocalMinimum(std::vector <CHR_PRP> &Charges, SUB_PRP &Substrate,const double &eps);
 
 #endif

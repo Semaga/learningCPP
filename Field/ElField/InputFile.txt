@@ -4,7 +4,7 @@ Substrate:
 Parameters of calculation:
 	Dimenstion = 500
 Other parameters:
-	Number of electrons = 2
+	Number of electrons = 50
 Name of output files:
 	Output EFS-files: outputfile1.txt
 	Output EFP-files: outputfile2.txt
