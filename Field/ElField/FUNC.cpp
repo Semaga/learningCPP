@@ -182,23 +182,23 @@ void ToLocalMinimum(std::vector <CHR_PRP> &Charges,  SUB_PRP &Substrate, const d
 	//Shift all particles after that calculate enegy
 	WriteMessage("\t\t@@@@@@","ToLocalMinimum");
 	WriteMessage("\n\t\t\t@@@Start optimize@@@","ToLocalMinimum");
-	int N = 1000;//number of itteration
-	double dR = 0.00001, x, y;
+	int N = 10000;//number of itteration
+	double dY = 0.000001, dX = 0.000001, x, y;
 	for(int n = 0; n!=N; n++){
 		WriteMessage("@@@Start " + std::to_string(n) +" itteration", "ToLocalMinimum");
 		WriteMessage("@@@Start to shift particales","ToLocalMinimum");
 		for (auto &i:Charges){
-			x = i.get_position_x();
-			y = i.get_position_y();	
-			if (i.get_action_force_x() > 0){
-				i.set_position_x(x + dR);
-			}else if(i.get_position_x() < 0){
-				i.set_position_x(x - dR);
+			x  =  i.get_position_x();
+			y  =  i.get_position_y();	
+			if (i.get_action_force_x(Substrate) > 0){
+				i.set_position_x(Substrate,x + dX);
+			}else if(i.get_action_force_x(Substrate) < 0){
+				i.set_position_x(Substrate, x - dX);
 			}
-			if (i.get_action_force_y() > 0){
-				i.set_position_y(y + dR);
-			}else if(i.get_position_y() < 0){
-				i.set_position_y(y - dR);
+			if (i.get_action_force_y(Substrate) > 0){
+				i.set_position_y(Substrate, y + dY);
+			}else if(i.get_action_force_y(Substrate) < 0){
+				i.set_position_y(Substrate, y - dY);
 			}
 		}
 		WriteMessage("@@@Finish to shift particales","ToLocalMinimum");

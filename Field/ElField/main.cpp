@@ -34,17 +34,9 @@ int main(int argc, char const *argv[]){
 	srand (time(NULL));
 	for (int i = 0; i != Charges.size(); i++){
 		Charges[i].set_charge(1);                                                           //set unit charge
-		double posx = 0;
-		posx = lenght_x / RAND_MAX * rand();
-		if (posx >= lenght_x){
-			posx =  2*lenght_x - posx;
-		}
-		Charges[i].set_position_x(posx);                                                    //set position in centimeters
-		posx = lenght_y / RAND_MAX * rand();
-		if (posx >= lenght_y){
-			posx =  2*lenght_y - posx;
-		}
-		Charges[i].set_position_y(lenght_y / RAND_MAX * rand());                            //set position in centimeters 		
+
+		Charges[i].set_position_x(substrate, lenght_y / RAND_MAX * rand());                                                    //set position in centimeters
+		Charges[i].set_position_y(substrate,lenght_y / RAND_MAX * rand());                            //set position in centimeters 		
 	}	
 	WriteMessage("Particles's position was write", "main");
 	std::vector <std::vector <double> > EFS(dimension, std::vector<double> (dimension));
