@@ -1,15 +1,15 @@
 #include "SUB_PRP.h"
 
-void SUB_PRP::set_lenght_x(  const  double &x){
+void SUB_PRP::set_lenght_x(   const  double &x){
 	lenght_x = x;
 }
-void SUB_PRP::set_lenght_y(  const double &y){
+void SUB_PRP::set_lenght_y(   const double &y){
 	lenght_y = y;
 }
-void SUB_PRP::set_dimnension(const int &d){
+void SUB_PRP::set_dimnension( const int &d){
 	dimension = d;
 }
-void SUB_PRP::set_potential(const double &p){
+void SUB_PRP::set_potential(  const double &p){
 	potential = p;
 }
 

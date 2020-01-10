@@ -11,25 +11,48 @@
 #include "CHR_PRP.h"
 #include "SUB_PRP.h"
 
-void VectorToZero(std::vector <std::vector <double> >&v);
+void VectorToZero( std::vector <std::vector <double> >&v);
 
-void WriteVectorToFile(const std::string &OutputFile, std::vector <std::vector <double> > &v, std::vector <CHR_PRP> &Charge, SUB_PRP &Substrate);
 
-void ReadInputFile(const std::string &InputeFile, SUB_PRP &Substrate, int &NumberOfParticle, 
-	std::string &OutputFile_EFS, std::string &OutputFile_EFP);
+void WriteVectorToFile(          const std::string &OutputFile, 
+	                               std::vector <std::vector <double> > &v, 
+	                               std::vector <CHR_PRP> &Charge, 
+	                               SUB_PRP &Substrate);
 
-void WriteMessage(const std::string &s, const std:: string &PositionFile);
 
-std::vector <std::string> split(std::string &s, char delimeter = ' ');
+void ReadInputFile(              const std::string &InputeFile, 
+	                               SUB_PRP &Substrate, 
+	                               int &NumberOfParticle, 
+	                               int &NumberIfItteration, 
+	                               std::string &OutputFile_EFS, 
+	                               std::string &OutputFile_EFP);
 
-double CalculateTotalEnergy(std::vector<CHR_PRP> &Charge);
 
-void CalculateForce(std::vector <CHR_PRP> &Charhe);
+void WriteMessage(               const std::string &s, 
+	                               const std:: string &PositionFile);
 
-void CalculateEFS(std::vector <std::vector <double> > &EFS, std::vector <CHR_PRP> &Charges, const double &delta_x, const double &delta_y);
 
-void CalculateEFP(std::vector <std::vector <double> > &EFS, std::vector <CHR_PRP> &Charges, const double &delta_x, const double &delta_y);
+std::vector <std::string> split( std::string &s, char delimeter = ' ');
 
-void ToLocalMinimum(std::vector <CHR_PRP> &Charges, const double &eps);
+
+void CalculateForce(             std::vector <CHR_PRP> &Charhe);
+
+
+void CalculateEFS(               std::vector <std::vector <double> > &EFS, 
+	                               std::vector <CHR_PRP> &Charges, 
+	                               const double &delta_x, 
+	                               const double &delta_y);
+
+
+void CalculateEFP(               std::vector <std::vector <double> > &EFS, 
+	                               std::vector <CHR_PRP> &Charges, 
+	                               const double &delta_x, 
+	                               const double &delta_y);
+
+
+void ToLocalMinimum(             std::vector <CHR_PRP> &Charges, 
+	                               const int &NumberIfItteration);
+
+double CalculateTotalEnergy(     std::vector<CHR_PRP> &Charge);
 
 #endif

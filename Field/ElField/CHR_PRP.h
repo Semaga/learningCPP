@@ -26,16 +26,16 @@ public:
 		lenght_x = substrate.get_lenght_x();
 		lenght_y = substrate.get_lenght_y();
 	}
-	void set_position_x(const double &x);
-	void set_position_y(const double &y);
-	void set_position_z(const double &z);
-	void set_charge(         const double &charge);
+	void set_position_x(      const double &x        );
+	void set_position_y(      const double &y        );
+	void set_position_z(      const double &z        );
+	void set_charge(          const double &charge   );
 
-	void set_action_force_x( const double &force_x);
-	void set_action_force_y( const double &force_y);
-	void set_action_force_z( const double &force_z);
+	void set_action_force_x(  const double &force_x  );
+	void set_action_force_y(  const double &force_y  );
+	void set_action_force_z(  const double &force_z  );
 
-	void set_energy(         const double &E);
+	void set_energy(             const double &E     );
 
 	double get_position_x(){     return position_x;   }
 	double get_position_y(){     return position_y;   }
@@ -45,11 +45,11 @@ public:
 	double get_action_force_x();
 	double get_action_force_y();
 
-	double get_action_force_z() {return action_force_z;}
+	double get_action_force_z(){ return action_force_z ;}
 
-	double get_energy(){         return energy;}
+	double get_energy(){         return energy         ;}
 
-  void WriteDataToFile(std::ofstream &fout);
+  void WriteDataToFile(        std::ofstream &fout   );
 
 
 };

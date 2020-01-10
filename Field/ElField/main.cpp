@@ -16,12 +16,12 @@
 int main(int argc, char const *argv[]){
 	SUB_PRP substrate;
 	//Set paramaters of cell wildth and lenght, fragmentation
-	int NumberOfParticle;
+	int NumberOfParticle, NumberIfItteration;
 	std::string OutputFile_EFS;
 	std::string OutputFile_EFP;
 	std::string OutputFile_EFS_af = "EFS_af.txt";
 	std::string OutputFile_EFP_af = "EFP_af.txt";
-	ReadInputFile("InputFile.txt", substrate, NumberOfParticle, OutputFile_EFS, OutputFile_EFP);
+	ReadInputFile("InputFile.txt", substrate, NumberOfParticle, NumberIfItteration, OutputFile_EFS, OutputFile_EFP);
 
 	//Put data of substrate to variables
 	int dimension = substrate.get_dimension();
