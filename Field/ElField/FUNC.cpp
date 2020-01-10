@@ -178,7 +178,7 @@ void CalculateEFP(std::vector <std::vector <double> > &EFP, std::vector <CHR_PRP
 	}	
 }
 
-void ToLocalMinimum(std::vector <CHR_PRP> &Charges,  SUB_PRP &Substrate, const double &eps){
+void ToLocalMinimum(std::vector <CHR_PRP> &Charges, const double &eps){
 	//Shift all particles after that calculate enegy
 	WriteMessage("\t\t@@@@@@","ToLocalMinimum");
 	WriteMessage("\n\t\t\t@@@Start optimize@@@","ToLocalMinimum");
@@ -190,15 +190,15 @@ void ToLocalMinimum(std::vector <CHR_PRP> &Charges,  SUB_PRP &Substrate, const d
 		for (auto &i:Charges){
 			x  =  i.get_position_x();
 			y  =  i.get_position_y();	
-			if (i.get_action_force_x(Substrate) > 0){
-				i.set_position_x(Substrate,x + dX);
-			}else if(i.get_action_force_x(Substrate) < 0){
-				i.set_position_x(Substrate, x - dX);
+			if (i.get_action_force_x() > 0){
+				i.set_position_x(x + dX);
+			}else if(i.get_action_force_x() < 0){
+				i.set_position_x( x - dX);
 			}
-			if (i.get_action_force_y(Substrate) > 0){
-				i.set_position_y(Substrate, y + dY);
-			}else if(i.get_action_force_y(Substrate) < 0){
-				i.set_position_y(Substrate, y - dY);
+			if (i.get_action_force_y() > 0){
+				i.set_position_y( y + dY);
+			}else if(i.get_action_force_y() < 0){
+				i.set_position_y( y - dY);
 			}
 		}
 		WriteMessage("@@@Finish to shift particales","ToLocalMinimum");

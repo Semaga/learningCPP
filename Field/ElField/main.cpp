@@ -29,14 +29,18 @@ int main(int argc, char const *argv[]){
 	double lenght_y = substrate.get_lenght_y();
 	
 	//make vector with Charges properties
-	std::vector<CHR_PRP> Charges(NumberOfParticle);
+	CHR_PRP cha(substrate);
+	std::vector<CHR_PRP> Charges;
+	for (int i = 0; i < NumberOfParticle; i++){
+		Charges.push_back(cha);
+	}
 	WriteMessage("Start to write particles's position", "main");
 	srand (time(NULL));
 	for (int i = 0; i != Charges.size(); i++){
 		Charges[i].set_charge(1);                                                           //set unit charge
 
-		Charges[i].set_position_x(substrate, lenght_y / RAND_MAX * rand());                                                    //set position in centimeters
-		Charges[i].set_position_y(substrate,lenght_y / RAND_MAX * rand());                            //set position in centimeters 		
+		Charges[i].set_position_x( lenght_y / RAND_MAX * rand());                                                    //set position in centimeters
+		Charges[i].set_position_y( lenght_y / RAND_MAX * rand());                            //set position in centimeters 		
 	}	
 	WriteMessage("Particles's position was write", "main");
 	std::vector <std::vector <double> > EFS(dimension, std::vector<double> (dimension));
@@ -73,7 +77,7 @@ int main(int argc, char const *argv[]){
 	double TotalEnergy = CalculateTotalEnergy(Charges);
 
 	double eps;
-	ToLocalMinimum(Charges, substrate, eps);
+	ToLocalMinimum(Charges, eps);
 	TotalEnergy = CalculateTotalEnergy(Charges);
 	WriteMessage("@@@@@@@@@@@@@@@@@@@@@@"," ");
 	WriteMessage("**********************"," ");

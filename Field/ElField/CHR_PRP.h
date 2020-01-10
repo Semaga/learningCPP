@@ -12,6 +12,9 @@ private:
 	double position_y;
 	double position_z;
 
+	double lenght_x;
+	double lenght_y;
+
 	double action_force_x;
 	double action_force_y;
 	double action_force_z;
@@ -19,9 +22,13 @@ private:
 	double energy;
 
 public:
-	void set_position_x(SUB_PRP& substrate, const double &x);
-	void set_position_y(SUB_PRP& substrate, const double &y);
-	void set_position_z(SUB_PRP& substrate, const double &z);
+	CHR_PRP(SUB_PRP & substrate){
+		lenght_x = substrate.get_lenght_x();
+		lenght_y = substrate.get_lenght_y();
+	}
+	void set_position_x(const double &x);
+	void set_position_y(const double &y);
+	void set_position_z(const double &z);
 	void set_charge(         const double &charge);
 
 	void set_action_force_x( const double &force_x);
@@ -35,10 +42,10 @@ public:
 	double get_position_z(){     return position_z;   }
 	double get_charge(){         return charge_value; }
 	
-	double get_action_force_x(SUB_PRP &substrate);
-	double get_action_force_y(SUB_PRP &substrate);
+	double get_action_force_x();
+	double get_action_force_y();
 
-	double get_action_force_z(SUB_PRP &substrate) {return action_force_z;}
+	double get_action_force_z() {return action_force_z;}
 
 	double get_energy(){         return energy;}
 
