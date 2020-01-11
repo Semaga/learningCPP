@@ -12,8 +12,8 @@ void VectorToZero(std::vector <std::vector <double> >&v){
 //Write data from 2d vector to file
 void WriteVectorToFile(const std::string &OutputFile, 
 	                     std::vector <std::vector <double> > &v, 
-	                     std::vector <CHR_PRP> &Charge, S
-	                     UB_PRP &Substrate)
+	                     std::vector <CHR_PRP> &Charge, 
+	                     SUB_PRP &Substrate)
 {
 	//Get vectors of result of calculation, ChargeParameters and Substrate parameters 
 	std::string s = "Start write the " + OutputFile;
@@ -24,6 +24,7 @@ void WriteVectorToFile(const std::string &OutputFile,
 		WriteMessage("Output file "+OutputFile+ " is open ...","FUNC");
 		Substrate.WriteDataToFile(fout);
 		//Write information about wubstrate
+		fout << "NumberOfParticle: " << Charge.size() << std::endl;
 		for(auto &i:Charge){
 		//Write information about charge particles using vector
 			i.WriteDataToFile(fout);
@@ -197,21 +198,21 @@ void ToLocalMinimum(std::vector <CHR_PRP> &Charges, const int &NumberIfItteratio
 	//Shift all particles after that calculate enegy
 	WriteMessage("\t\t@@@@@@","ToLocalMinimum");
 	WriteMessage("\n\t\t\t@@@Start optimize@@@","ToLocalMinimum");
-	double dY = 0.000001, dX = 0.000001, x, y;
+	double dY = 0.00001, dX = 0.00001, x, y;
 	for(int n = 0; n != NumberIfItteration; n++){
 		WriteMessage("@@@Start " + std::to_string(n) +" itteration", "ToLocalMinimum");
 		WriteMessage("@@@Start to shift particales","ToLocalMinimum");
 		for (auto &i:Charges){
 			x  =  i.get_position_x();
 			y  =  i.get_position_y();	
-			if (i.get_action_force_x() > 0){
+			if ( ( i.get_action_force_x() > 0 ) && ( ( x + dX ) < i.get_substrate_lenght_x() ) ){
 				i.set_position_x(x + dX);
-			}else if(i.get_action_force_x() < 0){
+			}else if( ( i.get_action_force_x() < 0 ) && ((x - dX) > 0) ) {
 				i.set_position_x( x - dX);
 			}
-			if (i.get_action_force_y() > 0){
+			if ( ( i.get_action_force_y() > 0 ) && ( ( y + dY ) < i.get_substrate_lenght_y() ) ){
 				i.set_position_y( y + dY);
-			}else if(i.get_action_force_y() < 0){
+			}else if( ( i.get_action_force_y() < 0 ) && ((y - dY) > 0 ) ){
 				i.set_position_y( y - dY);
 			}
 		}

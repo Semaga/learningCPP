@@ -51,6 +51,8 @@ public:
 
   void WriteDataToFile(        std::ofstream &fout   );
 
+  double get_substrate_lenght_x(){ return lenght_x;}
+  double get_substrate_lenght_y(){ return lenght_y;}
 
 };
 
