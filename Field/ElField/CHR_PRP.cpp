@@ -1,20 +1,20 @@
 #include "CHR_PRP.h"
 
 void CHR_PRP::set_position_x(     const double &x      ){
-	if (x < 0){
-		position_x = 0.01 * lenght_x;
-	}
-	else if (x > lenght_x){
-		position_x = 0.99 * lenght_x;
-	}
+	// if (x < 0){
+	// 	position_x = 0.01 * lenght_x;
+	// }
+	// else if (x > lenght_x){
+	// 	position_x = 0.99 * lenght_x;
+	// }
 	position_x = x;
 }
 void CHR_PRP::set_position_y(     const double& y      ){
-	if (y < 0)
-		position_y = 0.01 * lenght_y;
-	else if (y > lenght_y)
-		position_y = 0.99 * lenght_y;
-	else
+	// if (y < 0)
+	// 	position_y = 0.01 * lenght_y;
+	// else if (y > lenght_y)
+	// 	position_y = 0.99 * lenght_y;
+	// else
 	position_y = y;
 }
 

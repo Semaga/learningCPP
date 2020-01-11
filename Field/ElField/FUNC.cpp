@@ -44,6 +44,33 @@ void WriteVectorToFile(const std::string &OutputFile,
 		WriteMessage("Error file "+OutputFile+" not found","FUNC");
 }
 
+void WriteChargesDataToFile (    const std::string &OutputFile,
+	                               std::vector <CHR_PRP> &Charge,
+	                               SUB_PRP &Substrate)
+{
+	//Get vectors of result of calculation, ChargeParameters and Substrate parameters 
+	std::string s = "Start write the " + OutputFile;
+	WriteMessage(s,"WriteVectorToFile");
+	std::ofstream fout(OutputFile);
+	//Make stream to write-file
+	if(fout){
+		WriteMessage("Output file "+OutputFile+ " is open ...","FUNC");
+		Substrate.WriteDataToFile(fout);
+		//Write information about wubstrate
+		fout << "NumberOfParticle: " << Charge.size() << std::endl;
+		for(auto &i:Charge){
+		//Write information about charge particles using vector
+			i.WriteDataToFile(fout);
+		} 
+		//Write result of calculation to file
+		WriteMessage("Write date to file","FUNC");
+		fout.close();
+		WriteMessage("File "+OutputFile+" was closed.","FUNC");
+	}else
+		WriteMessage("Error file "+OutputFile+" not found","FUNC");
+}
+
+
 //Read input data from InputFile
 void ReadInputFile(    const std::string &InputeFile, 
 	                     SUB_PRP &Substrate, 

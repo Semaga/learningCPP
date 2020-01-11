@@ -19,6 +19,10 @@ void WriteVectorToFile(          const std::string &OutputFile,
 	                               std::vector <CHR_PRP> &Charge, 
 	                               SUB_PRP &Substrate);
 
+void WriteChargesDataToFile (    const std::string &OutputFile,
+	                               std::vector <CHR_PRP> &Charge,
+	                               SUB_PRP &Substrate);
+
 
 void ReadInputFile(              const std::string &InputeFile, 
 	                               SUB_PRP &Substrate, 
@@ -54,5 +58,7 @@ void ToLocalMinimum(             std::vector <CHR_PRP> &Charges,
 	                               const int &NumberIfItteration);
 
 double CalculateTotalEnergy(     std::vector<CHR_PRP> &Charge);
+
+
 
 #endif
