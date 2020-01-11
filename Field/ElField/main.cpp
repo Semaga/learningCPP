@@ -58,7 +58,7 @@ int main(int argc, char const *argv[]){
 	VectorToZero(EFS);
 	WriteMessage("Calculate EFS and write data in vector", "main");
 
-	CalculateEFS(EFS, Charges, delta_x, delta_y);
+	// CalculateEFS(EFS, Charges, delta_x, delta_y);
 
 	WriteMessage("Data of EFF was write in vector", "main");
 	WriteVectorToFile(OutputFile_EFS, EFS, Charges, substrate);
@@ -66,7 +66,7 @@ int main(int argc, char const *argv[]){
 	VectorToZero(EFP);
 	WriteMessage("Calculate Potantial of EF and write data in vector", "main");
 	
-	CalculateEFP(EFP, Charges, delta_x, delta_y);
+	// CalculateEFP(EFP, Charges, delta_x, delta_y);
 	
 	WriteVectorToFile(OutputFile_EFP, EFP, Charges, substrate);
 	
@@ -83,9 +83,9 @@ int main(int argc, char const *argv[]){
 	WriteMessage("**********************"," ");
 
 	VectorToZero(EFS);
-	WriteMessage("Calculate EFS and write data in vector", "main");
+	// WriteMessage("Calculate EFS and write data in vector", "main");
 
-	CalculateEFS(EFS, Charges, delta_x, delta_y);
+	// CalculateEFS(EFS, Charges, delta_x, delta_y);
 
 	WriteMessage("Data of EFF was write in vector", "main");
 	WriteVectorToFile(OutputFile_EFS_af, EFS, Charges, substrate);
@@ -93,9 +93,9 @@ int main(int argc, char const *argv[]){
 	VectorToZero(EFP);
 	WriteMessage("Calculate Potantial of EF and write data in vector", "main");
 	
-	CalculateEFP(EFP, Charges, delta_x, delta_y);
+	// CalculateEFP(EFP, Charges, delta_x, delta_y);
 	
-	WriteVectorToFile(OutputFile_EFP_af, EFP, Charges, substrate);
+	// WriteVectorToFile(OutputFile_EFP_af, EFP, Charges, substrate);
 	
 	//Calcaulate forces action to particles
 	CalculateForce(Charges);

@@ -26,10 +26,14 @@ void CHR_PRP::set_charge(         const double &charge  ){
 }
 
 void CHR_PRP::set_action_force_x( const double &force_x ){
-	action_force_x = force_x;
+	double f = 0.0;
+	f = - 1500'000'000 * (position_x - lenght_x/2.0);
+	action_force_x = force_x + f;
 }
 void CHR_PRP::set_action_force_y( const double &force_y ){
-	action_force_y = force_y;
+	double f = 0.0;
+	// f = - 1500'000'000 * (position_y - lenght_y/2.0);
+	action_force_y = force_y + f;
 }
 
 void CHR_PRP::set_energy(         const double &E       ){
